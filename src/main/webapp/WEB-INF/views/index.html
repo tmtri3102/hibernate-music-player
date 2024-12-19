@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/layout :: head">
+    <title>ListCustomer</title>
+</head>
+<body>
+<h3>Customers</h3>
+<p>
+    <a th:href="@{/customers/create}">
+        Add new customer
+    </a>
+</p>
+
+<table id = "customers">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>View</th>
+        <th>Index</th>
+        <th>Count</th>
+        <th>Even row</th>
+        <th>Odd row</th>
+        <th>First row</th>
+        <th>Last row</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="row,rowStat : ${customers}">
+        <td th:text="${row.getId()}"></td>
+        <td th:text="${row.getName()}"></td>
+        <td th:text="${row.getEmail()}"></td>
+        <td th:text="${row.getAddress()}"></td>
+        <td><a th:href="@{/customers/{id}/edit(id=${row.getId()})}">edit</a></td>
+        <td><a th:href="@{/customers/{id}/delete(id=${row.getId()})}">delete</a></td>
+        <td><a th:href="@{/customers/{id}/view(id=${row.getId()})}">view</a></td>
+        <td th:text="${rowStat.index}"></td>
+        <td th:text="${rowStat.count}"></td>
+        <td th:text="${rowStat.even}"></td>
+        <td th:text="${rowStat.odd}"></td>
+        <td th:text="${rowStat.first}"></td>
+        <td th:text="${rowStat.last}"></td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>

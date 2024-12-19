@@ -1,5 +1,7 @@
 package com.codegym.musicplayer.configuration;
 
+import com.codegym.musicplayer.service.HibernateSongService;
+import com.codegym.musicplayer.service.ISongService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -55,6 +57,11 @@ public class AppConfiguration implements WebMvcConfigurer, ApplicationContextAwa
         return viewResolver;
     }
 
+
+    @Bean
+    public ISongService songService() {
+        return new HibernateSongService();
+    }
 
 
     //Upload file
