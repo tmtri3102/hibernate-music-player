@@ -4,46 +4,32 @@
     <title>ListCustomer</title>
 </head>
 <body>
-<h3>Customers</h3>
+<h3>All Songs</h3>
 <p>
-    <a th:href="@{/customers/create}">
+    <a th:href="@{/songs/create}">
         Add new customer
     </a>
 </p>
 
-<table id = "customers">
+<table id = "songs">
     <thead>
     <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Address</th>
-        <th>Edit</th>
-        <th>Delete</th>
-        <th>View</th>
-        <th>Index</th>
-        <th>Count</th>
-        <th>Even row</th>
-        <th>Odd row</th>
-        <th>First row</th>
-        <th>Last row</th>
+        <th>Title</th>
+        <th>Artist</th>
+        <th>Genre</th>
+        <th>Play</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="row,rowStat : ${customers}">
+    <tr th:each="row,rowStat : ${songs}">
         <td th:text="${row.getId()}"></td>
-        <td th:text="${row.getName()}"></td>
-        <td th:text="${row.getEmail()}"></td>
-        <td th:text="${row.getAddress()}"></td>
-        <td><a th:href="@{/customers/{id}/edit(id=${row.getId()})}">edit</a></td>
-        <td><a th:href="@{/customers/{id}/delete(id=${row.getId()})}">delete</a></td>
-        <td><a th:href="@{/customers/{id}/view(id=${row.getId()})}">view</a></td>
-        <td th:text="${rowStat.index}"></td>
-        <td th:text="${rowStat.count}"></td>
-        <td th:text="${rowStat.even}"></td>
-        <td th:text="${rowStat.odd}"></td>
-        <td th:text="${rowStat.first}"></td>
-        <td th:text="${rowStat.last}"></td>
+        <td th:text="${row.getTitle()}"></td>
+        <td th:text="${row.getArtist()}"></td>
+        <td th:text="${row.getGenre()}"></td>
+        <td><a th:href="@{/songs/{id}/edit(id=${row.getId()})}">edit</a></td>
+        <td><a th:href="@{/songs/{id}/delete(id=${row.getId()})}">delete</a></td>
+        <td><a th:href="@{/songs/{id}/view(id=${row.getId()})}">view</a></td>
+        <td><audio width="100" height="100" th:src="@{'/audio/' + ${p.link}}" ></td>
     </tr>
     </tbody>
 </table>

@@ -1,12 +1,16 @@
 package com.codegym.musicplayer.service;
 
 import com.codegym.musicplayer.model.Song;
+import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 @Service
 public class HibernateSongService implements ISongService {
+    private static SessionFactory sessionFactory;
+    private static EntityManager entityManager;
     @Override
     public List<Song> findAll() {
         return List.of();

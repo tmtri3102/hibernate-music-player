@@ -3,12 +3,13 @@ package com.codegym.musicplayer.model;
 import org.springframework.web.multipart.MultipartFile;
 
 public class SongForm {
+    private int id;
     private String title;
     private String artist;
     private String genre;
     private MultipartFile link;
 
-    public SongForm(String title, String artist, String genre, MultipartFile link) {
+    public SongForm(int id, String title, String artist, String genre, MultipartFile link) {
         this.title = title;
         this.artist = artist;
         this.genre = genre;
@@ -16,6 +17,14 @@ public class SongForm {
     }
 
     public SongForm() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {

@@ -1,12 +1,13 @@
 package com.codegym.musicplayer.model;
 
 public class Song {
+    private int id;
     private String title;
     private String artist;
     private String genre;
     private String link;
 
-    public Song(String title, String artist, String genre, String link) {
+    public Song(int id, String title, String artist, String genre, String link) {
         this.title = title;
         this.artist = artist;
         this.genre = genre;
@@ -14,6 +15,14 @@ public class Song {
     }
 
     public Song() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
