@@ -1,6 +1,12 @@
 package com.codegym.musicplayer.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "song")
 public class Song {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
     private String artist;

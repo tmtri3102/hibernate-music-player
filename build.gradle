@@ -39,6 +39,10 @@ dependencies {
     // https://mvnrepository.com/artifact/mysql/mysql-connector-java
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.30'
 
+
+    // cho phép gửi và nhận các định dạng file thông qua lớp MultipathFile.
+    implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
+
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }

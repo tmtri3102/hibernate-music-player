@@ -11,7 +11,7 @@
     </a>
 </p>
 <div id="form">
-    <form th:action="@{/customers/save}" th:object="${customer}"
+    <form th:action="@{/songs/save}" th:object="${songForm}"
           method="POST" novalidate="novalidate">
         <!--   mỗi thuộc tính của customer sẽ tương ứng với một input trong form   -->
         <input type="hidden" th:field="*{id}"/>

@@ -7,7 +7,7 @@
 <h3>All Songs</h3>
 <p>
     <a th:href="@{/songs/create}">
-        Add new customer
+        Add new song
     </a>
 </p>
 
@@ -21,15 +21,16 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="row,rowStat : ${songs}">
-        <td th:text="${row.getId()}"></td>
-        <td th:text="${row.getTitle()}"></td>
-        <td th:text="${row.getArtist()}"></td>
-        <td th:text="${row.getGenre()}"></td>
-        <td><a th:href="@{/songs/{id}/edit(id=${row.getId()})}">edit</a></td>
-        <td><a th:href="@{/songs/{id}/delete(id=${row.getId()})}">delete</a></td>
-        <td><a th:href="@{/songs/{id}/view(id=${row.getId()})}">view</a></td>
-        <td><audio width="100" height="100" th:src="@{'/audio/' + ${p.link}}" ></td>
+    <tr th:each="s : ${songs}">
+        <td th:text="${s.title}"></td>
+        <td th:text="${s.artist}"></td>
+        <td th:text="${s.genre}"></td>
+        <td><audio controls>
+            <source th:src="@{'/songs/' + ${s.link}}" type="audio/mpeg">
+            Browser does not support the audio tag.
+        </audio></td>
+        <td><a th:href="@{/songs/{id}/edit(id=${s.id})}">Edit</a></td>
+        <td><a th:href="@{/songs/{id}/delete(id=${s.id})}">Delete</a></td>
     </tr>
     </tbody>
 </table>

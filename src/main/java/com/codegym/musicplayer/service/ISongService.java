@@ -10,5 +10,4 @@ public interface ISongService {
     void save(Song song);
     void delete(int id);
     void update(Song song);
-    List<Song> findByTitle(String title);
 }

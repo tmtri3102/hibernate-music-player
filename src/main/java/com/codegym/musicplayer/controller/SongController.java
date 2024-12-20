@@ -25,42 +25,42 @@ public class SongController {
     @Autowired
     private ISongService songService;
 
-    @GetMapping("")
+    @GetMapping
     public String getAllSongs(Model model) {
-        List<Song> songList = songService.findAll();
-            model.addAttribute("songs", songList);
+        model.addAttribute("songs", songService.findAll());
         return "/index";
     }
 
     @GetMapping("/create")
     public String showCreateForm(Model model) {
-        model.addAttribute("song", new Song());
-        String message = "A new song has been created.";
-        model.addAttribute("message", message);
+        model.addAttribute("songForm", new SongForm());
         return "/create";
     }
 
     @Value("${file-upload}")
-    private String fileUpload;
+    private String folderPath;
+
     @PostMapping("/save")
-    public ModelAndView save(SongForm songForm) {
+    public String save(SongForm songForm, Model model) {
         MultipartFile multipartFile = songForm.getLink();
         String fileName = multipartFile.getOriginalFilename();
+
         try {
-            FileCopyUtils.copy(songForm.getLink().getBytes(), new File(fileUpload + fileName));
+            FileCopyUtils.copy(songForm.getLink().getBytes(), new File(folderPath + fileName));
         } catch (IOException ex) {
             ex.printStackTrace();
+            System.out.println(ex.getMessage());
         }
-        Song song = new Song(songForm.getId(), songForm.getTitle(), songForm.getArtist(), songForm.getGenre(), fileName);
+        Song song = new Song(0, songForm.getTitle(), songForm.getArtist(), songForm.getGenre(), fileName);
         songService.save(song);
-        return modelAndView;
+        model.addAttribute("songForm", songForm);
+        return "/create";
     }
 
     @GetMapping("/{id}/edit")
     public String showEditForm(@PathVariable int id, Model model) {
-        Song song = songService.findById(id);
-        model.addAttribute("song", song);
-        return "/edit";
+        model.addAttribute("song", songService.findById(id));
+        return "/update";
     }
 
     @PostMapping("/update")
@@ -75,18 +75,15 @@ public class SongController {
         model.addAttribute("song", song);
         return "/view";
     }
+
     @GetMapping("/{id}/delete")
+    public String showDeleteForm(@PathVariable int id, Model model) {
+        model.addAttribute("song", songService.findById(id));
+        return "/delete";
+    }
+    @PostMapping("/delete")
     public String delete(@PathVariable int id) {
         songService.delete(id);
         return "redirect:/songs";
     }
-//    con postmapping delete
-//    check search
-    @GetMapping("/search")
-    public String search(@PathVariable String title, Model model) {
-        List<Song> songList = songService.findByTitle(title);
-        model.addAttribute("songs", songList);
-        return "/index";
-    }
-
 }
