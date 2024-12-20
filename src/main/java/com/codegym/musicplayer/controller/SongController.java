@@ -39,9 +39,10 @@ public class SongController {
 
     @Value("${file-upload}")
     private String folderPath;
-
     @PostMapping("/save")
     public String save(SongForm songForm, Model model) {
+        System.out.println("saving " + songForm);
+        System.out.println("hello");
         MultipartFile multipartFile = songForm.getLink();
         String fileName = multipartFile.getOriginalFilename();
 
@@ -54,6 +55,7 @@ public class SongController {
         Song song = new Song(0, songForm.getTitle(), songForm.getArtist(), songForm.getGenre(), fileName);
         songService.save(song);
         model.addAttribute("songForm", songForm);
+        model.addAttribute("success", "Added a new song");
         return "/create";
     }
 
@@ -81,7 +83,7 @@ public class SongController {
         model.addAttribute("song", songService.findById(id));
         return "/delete";
     }
-    @PostMapping("/delete")
+    @PostMapping("/{id}/delete")
     public String delete(@PathVariable int id) {
         songService.delete(id);
         return "redirect:/songs";

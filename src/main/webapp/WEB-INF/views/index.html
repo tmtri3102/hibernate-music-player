@@ -18,6 +18,7 @@
         <th>Artist</th>
         <th>Genre</th>
         <th>Play</th>
+        <th colspan="2">Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -28,7 +29,9 @@
         <td><audio controls>
             <source th:src="@{'/songs/' + ${s.link}}" type="audio/mpeg">
             Browser does not support the audio tag.
-        </audio></td>
+        </audio>
+        <p th:text="${s.link}"></p>
+        </td>
         <td><a th:href="@{/songs/{id}/edit(id=${s.id})}">Edit</a></td>
         <td><a th:href="@{/songs/{id}/delete(id=${s.id})}">Delete</a></td>
     </tr>

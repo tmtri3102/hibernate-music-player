@@ -6,22 +6,22 @@
 <body>
 <h3>View Customer</h3>
 <p>
-    <a th:href="@{/customers}">
-        Back to customer list
+    <a th:href="@{/songs}">
+        Back to playlist
     </a>
 </p>
 <div id="detail">
     <div class="cus-detail">
-        <label>Name:</label>
-        <label th:text="${customer.name}"></label>
+        <label>Title:</label>
+        <label th:text="${song.title}"></label>
     </div>
     <div class="cus-detail">
-        <label>Email:</label>
-        <label th:text="${customer.email}"></label>
+        <label>Artist:</label>
+        <label th:text="${song.artist}"></label>
     </div>
     <div class="cus-detail">
-        <label>Address:</label>
-        <label th:text="${customer.address}"></label>
+        <label>Genre:</label>
+        <label th:text="${song.Genre}"></label>
     </div>
 </div>
 <footer th:replace="/layout :: footer"></footer>
