@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/layout :: head">
+    <title>Create file</title>
+</head>
+<body>
+<form th:action="@{/songs/upload}" th:object="${upload}" method="post" enctype="multipart/form-data">
+  File: <input type="file" th:field="*{file}" />
+  <button type="submit">Upload</button>
+</form>
+</body>
+</html>

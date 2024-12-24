@@ -2,16 +2,16 @@ package com.codegym.musicplayer.controller;
 
 import com.codegym.musicplayer.model.Song;
 import com.codegym.musicplayer.model.SongForm;
+import com.codegym.musicplayer.model.Upload;
 import com.codegym.musicplayer.service.ISongService;
+import com.codegym.musicplayer.service.UploadFileService;
+import org.apache.commons.fileupload.FileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,6 +25,37 @@ public class SongController {
     @Autowired
     private ISongService songService;
 
+    @ModelAttribute("song")
+    public Song song(){
+        return new Song();
+    }
+
+    // upload form
+    @RequestMapping("demo")
+    public ModelAndView demo(){
+        ModelAndView mav = new ModelAndView("/demo");
+        String name = "Codegym";
+        mav.addObject("name", name);
+        List<Song> songs = songService.findAll();
+        mav.addObject("songs", songs);
+        mav.addObject("upload", new Upload()); // Bind Upload object to the form
+        return mav;
+    }
+    // submit upload
+    @PostMapping("upload")
+    public ModelAndView upload(@ModelAttribute("upload") Upload upload) throws IOException {
+        ModelAndView mav = new ModelAndView("/view2");
+        System.out.println(upload.getFile());
+        System.out.println("Hello World");
+        UploadFileService uploadFileService = new UploadFileService();
+        uploadFileService.uploadFile(upload.getFile());
+        return mav;
+    }
+
+
+
+
+
     @GetMapping
     public String getAllSongs(Model model) {
         model.addAttribute("songs", songService.findAll());
@@ -36,6 +67,7 @@ public class SongController {
         model.addAttribute("songForm", new SongForm());
         return "/create";
     }
+
 
     @Value("${file-upload}")
     private String folderPath;
@@ -58,6 +90,13 @@ public class SongController {
         model.addAttribute("success", "Added a new song");
         return "/create";
     }
+
+
+
+
+
+
+
 
     @GetMapping("/{id}/edit")
     public String showEditForm(@PathVariable int id, Model model) {

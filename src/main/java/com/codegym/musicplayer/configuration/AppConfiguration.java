@@ -64,7 +64,7 @@ public class AppConfiguration implements WebMvcConfigurer, ApplicationContextAwa
     }
 
 
-    //Upload file
+    // Upload file
     // Config files location by new reference path for server to get the file (hide true location)
     @Value("${file-upload}")
     private String folderPath;
@@ -78,7 +78,7 @@ public class AppConfiguration implements WebMvcConfigurer, ApplicationContextAwa
     @Bean(name = "multipartResolver")
     public CommonsMultipartResolver getResolver() {
         CommonsMultipartResolver resolver = new CommonsMultipartResolver();
-        resolver.setMaxUploadSizePerFile(52428800); // 50 MB
+        resolver.setMaxUploadSizePerFile(5242880); // 5 MB
         return resolver;
     }
 }
